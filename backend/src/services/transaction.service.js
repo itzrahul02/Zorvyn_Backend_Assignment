@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
 import { Transaction, TRANSACTION_CATEGORIES } from '../models/Transaction.js';
 
+/**
+ * Transaction service
+ * Contains helpers for listing, creating and updating transactions.
+ * These functions are deliberately small and focused to make testing easier.
+ */
+
 function buildFilter(query) {
   const filter = { isDeleted: false };
 
