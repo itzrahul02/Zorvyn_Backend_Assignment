@@ -1,0 +1,267 @@
+:root {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.5;
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.muted {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.error {
+  color: #b91c1c;
+  margin: 0.5rem 0;
+}
+
+.session-hint {
+  margin: 0 0 0.75rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.88rem;
+  color: #0c4a6e;
+  background: #e0f2fe;
+  border-radius: 6px;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+}
+
+.nav a {
+  opacity: 0.9;
+}
+
+.user-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.main {
+  padding: 1.5rem;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.grid.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stat strong {
+  font-size: 1.35rem;
+}
+
+.stat.highlight {
+  border: 1px solid #38bdf8;
+  background: linear-gradient(135deg, #f0f9ff, #fff);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.5rem 0.35rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+.auth-card h1 {
+  margin: 0 0 0.25rem;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.auth-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+input,
+select {
+  padding: 0.45rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.85rem;
+  background: #0ea5e9;
+  color: #fff;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.link {
+  background: transparent;
+  color: #0ea5e9;
+  padding: 0;
+}
+
+button.link.danger {
+  color: #b91c1c;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.form-row.wrap {
+  align-items: flex-end;
+}
+
+.filters {
+  margin-bottom: 0.75rem;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.trend-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trend-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.trend-label {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bar {
+  height: 8px;
+  border-radius: 4px;
+  min-width: 4px;
+}
+
+.bar.income {
+  background: #22c55e;
+}
+
+.bar.expense {
+  background: #f97316;
+}
