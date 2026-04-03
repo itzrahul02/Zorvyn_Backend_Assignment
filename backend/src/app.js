@@ -14,6 +14,9 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 export function createApp() {
   const app = express();
 
+  // Log environment on startup to aid debugging in dev environments
+  console.log('Starting Zorvyn API; NODE_ENV=', process.env.NODE_ENV || 'development');
+
   app.use(helmet());
   app.use(
     cors({
