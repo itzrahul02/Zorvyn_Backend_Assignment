@@ -1,5 +1,8 @@
 # Zorvyn — Finance dashboard (MERN)
 
+**Swagger API Docs:** `http://localhost:5000/docs`  
+**Bearer token generator (dev only):** `http://localhost:5000/dev/tokens`
+
 Backend API for financial records with **role-based access control (RBAC)**, **dashboard aggregations**, and a **React** client. Stack: **Node.js**, **Express**, **MongoDB** (Mongoose), **React** (Vite).
 
 ## Prerequisites
