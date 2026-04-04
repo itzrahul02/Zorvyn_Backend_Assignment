@@ -66,6 +66,7 @@ export function createApp() {
           <h1>Backend is running</h1>
           <p>Service: zorvyn-api</p>
           <p>Interactive docs: <a href="/docs">/docs</a></p>
+          <p>Bearer Tokens: <a href="/dev/tokens">dev/tokens</a></p>
         </body>
       </html>
       `
