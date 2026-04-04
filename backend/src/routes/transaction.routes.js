@@ -27,6 +27,30 @@ const createFields = [
 
 router.use(requireAuth());
 
+/**
+ * @openapi
+ * /api/transactions/statistics:
+ *   get:
+ *     summary: Get transaction statistics for a period
+ *     tags:
+ *       - Transactions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: start_date
+ *         schema:
+ *           type: string
+ *           format: date
+ *       - in: query
+ *         name: end_date
+ *         schema:
+ *           type: string
+ *           format: date
+ *     responses:
+ *       '200':
+ *         description: Statistics
+ */
 router.get(
   '/statistics',
   requireCapability('transactions:read'),
@@ -52,6 +76,42 @@ router.get(
   }
 );
 
+/**
+ * @openapi
+ * /api/transactions/bulk:
+ *   post:
+ *     summary: Bulk create transactions
+ *     tags:
+ *       - Transactions
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               records:
+ *                 type: array
+ *           examples:
+ *             sample:
+ *               summary: Bulk records example
+ *               value:
+ *                 records:
+ *                   - amount: 50.25
+ *                     type: expense
+ *                     category: food
+ *                     date: 2026-04-01
+ *                     notes: Lunch
+ *                   - amount: 1200
+ *                     type: income
+ *                     category: salary
+ *                     date: 2026-03-25
+ *     responses:
+ *       '201':
+ *         description: Created
+ */
 router.post(
   '/bulk',
   requireCapability('transactions:create'),
@@ -72,6 +132,32 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /api/transactions:
+ *   get:
+ *     summary: List transactions
+ *     tags:
+ *       - Transactions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: type
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: List result
+ */
 router.get(
   '/',
   requireCapability('transactions:read'),
@@ -92,6 +178,25 @@ router.get(
   }
 );
 
+/**
+ * @openapi
+ * /api/transactions/{id}:
+ *   get:
+ *     summary: Get transaction by id
+ *     tags:
+ *       - Transactions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Transaction
+ */
 router.get(
   '/:id',
   requireCapability('transactions:read'),
@@ -111,6 +216,42 @@ router.get(
   }
 );
 
+/**
+ * @openapi
+ * /api/transactions:
+ *   post:
+ *     summary: Create a transaction
+ *     tags:
+ *       - Transactions
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               amount:
+ *                 type: number
+ *               type:
+ *                 type: string
+ *               category:
+ *                 type: string
+ *               date:
+ *                 type: string
+ *           examples:
+ *             simple:
+ *               summary: Create transaction example
+ *               value:
+ *                 amount: 25.5
+ *                 type: expense
+ *                 category: food
+ *                 date: 2026-04-03
+ *     responses:
+ *       '201':
+ *         description: Created
+ */
 router.post(
   '/',
   requireCapability('transactions:create'),
@@ -129,6 +270,31 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /api/transactions/{id}:
+ *   patch:
+ *     summary: Update a transaction
+ *     tags:
+ *       - Transactions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       '200':
+ *         description: Updated
+ */
 router.patch(
   '/:id',
   requireTransactionPatchAccess(),
@@ -153,6 +319,25 @@ router.patch(
   }
 );
 
+/**
+ * @openapi
+ * /api/transactions/{id}:
+ *   delete:
+ *     summary: Soft-delete a transaction
+ *     tags:
+ *       - Transactions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Deleted
+ */
 router.delete(
   '/:id',
   requireCapability('transactions:delete'),

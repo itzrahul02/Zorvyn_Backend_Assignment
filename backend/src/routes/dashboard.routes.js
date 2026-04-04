@@ -9,6 +9,19 @@ const router = Router();
 router.use(requireAuth());
 router.use(requireCapability('dashboard:read'));
 
+/**
+ * @openapi
+ * /api/dashboard/summary:
+ *   get:
+ *     summary: Get dashboard summary
+ *     tags:
+ *       - Dashboard
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Summary data
+ */
 router.get('/summary', async (req, res, next) => {
   try {
     const data = await dashboardService.getSummary();
@@ -18,6 +31,24 @@ router.get('/summary', async (req, res, next) => {
   }
 });
 
+/**
+ * @openapi
+ * /api/dashboard/recent:
+ *   get:
+ *     summary: Get recent dashboard items
+ *     tags:
+ *       - Dashboard
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: Recent items
+ */
 router.get(
   '/recent',
   query('limit').optional().isInt({ min: 1, max: 50 }),
@@ -35,6 +66,28 @@ router.get(
   }
 );
 
+/**
+ * @openapi
+ * /api/dashboard/trends:
+ *   get:
+ *     summary: Get dashboard trends
+ *     tags:
+ *       - Dashboard
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: groupBy
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: span
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: Trends data
+ */
 router.get(
   '/trends',
   query('groupBy').optional().isIn(['month', 'week']),

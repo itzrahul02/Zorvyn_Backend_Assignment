@@ -5,6 +5,44 @@ import { signToken } from '../middleware/auth.js';
 
 const router = Router();
 
+/**
+ * @openapi
+ * /api/auth/login:
+ *   post:
+ *     summary: Authenticate user and return JWT
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *           examples:
+ *             admin:
+ *               summary: Admin credentials
+ *               value:
+ *                 email: admin@example.com
+ *                 password: adminadmin
+ *     responses:
+ *       '200':
+ *         description: Authenticated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ */
 router.post(
   '/login',
   body('email').isEmail().normalizeEmail(),

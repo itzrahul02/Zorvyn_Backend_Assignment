@@ -10,6 +10,19 @@ const router = Router();
 router.use(requireAuth());
 router.use(requireCapability('users:manage'));
 
+/**
+ * @openapi
+ * /api/users:
+ *   get:
+ *     summary: List users
+ *     tags:
+ *       - Users
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: User list
+ */
 router.get('/', async (req, res, next) => {
   try {
     const users = await userService.listUsers();
@@ -19,6 +32,40 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+/**
+ * @openapi
+ * /api/users:
+ *   post:
+ *     summary: Create a user
+ *     tags:
+ *       - Users
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *               name:
+ *                 type: string
+ *           examples:
+ *             newUser:
+ *               summary: Create user example
+ *               value:
+ *                 email: newuser@example.com
+ *                 password: password123
+ *                 name: New User
+ *     responses:
+ *       '201':
+ *         description: Created
+ */
 router.post(
   '/',
   body('email').isEmail().normalizeEmail(),
@@ -43,6 +90,31 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /api/users/{id}:
+ *   patch:
+ *     summary: Update user
+ *     tags:
+ *       - Users
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       '200':
+ *         description: Updated
+ */
 router.patch(
   '/:id',
   param('id').isMongoId(),

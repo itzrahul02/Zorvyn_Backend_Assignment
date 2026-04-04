@@ -8,6 +8,19 @@ const router = Router();
 router.use(requireAuth());
 router.use(requireCapability('users:manage'));
 
+/**
+ * @openapi
+ * /api/roles:
+ *   get:
+ *     summary: List roles and descriptions
+ *     tags:
+ *       - Roles
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Roles
+ */
 router.get('/', (req, res) => {
   res.json({
     roles: ROLES.map((name) => ({
